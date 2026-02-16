@@ -4,7 +4,7 @@ import { scale } from 'react-native-size-matters';
 import { useAppSelector } from '../hooks/storeHooks';
 
 
-type customFamilyType = "default" | "WixMadeforText"
+type customFamilyType = "default" | "Montserrat"
 type customWeightType = '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900' | 'normal' | 'bold'
 
 const getFontFamily = (baseFont: customFamilyType, weight: customWeightType): string => {
@@ -54,13 +54,13 @@ const CustomText: React.FC<CustomTextProps> = ({
     children,
     customWeight = "400",
     customSize = 'regular',
-    customFamily = "WixMadeforText",
+    customFamily = "Montserrat",
     style,
     ...props
 }) => {
     const fontFamily = customFamily !== "default" ? getFontFamily(customFamily, customWeight) : undefined;
     const fontWeight = customFamily === 'default' ? customWeight : undefined;
-    var fontSize = fontSizes[customSize] || fontSizes.regular;
+    let fontSize = fontSizes[customSize] || fontSizes.regular;
     const COLORS = useAppSelector(state => state.theme.colors)
     const styles = StyleSheet.create({
         text: {
