@@ -1,45 +1,44 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import { Appearance, StatusBar } from 'react-native'
+import { useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from './src/hooks/storeHooks';
+import { setThemeMode } from './src/store/themeSlice';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { ScaledSheet } from 'react-native-size-matters';
+import CustomText from './src/components/CustomText';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+const App = () => {
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+  const dispatch = useAppDispatch();
+  const isSystemModeEnabled = useAppSelector(state => state.theme.isSystemModeEnabled)
+  const COLORS = useAppSelector(state => state.theme.colors)
+  const themeMode = useAppSelector(state => state.theme.themeMode)
+
+  const styles = ScaledSheet.create({
+    statusBarAndSafeAreaView: {
+      flex: 1,
+      backgroundColor: COLORS.statusBarAndSafeAreaView,
+    }
+  })
+
+  useEffect(() => {
+    const sub = Appearance.addChangeListener(({ colorScheme }) => {
+      if (!isSystemModeEnabled) return;
+      dispatch(setThemeMode(colorScheme === 'dark' ? 'systemDark' : 'systemLight'));
+    });
+    return () => sub.remove();
+  }, [dispatch, isSystemModeEnabled]);
 
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
-  );
-}
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
+    <>
+      <StatusBar
+        backgroundColor={COLORS.statusBarAndSafeAreaView}
+        barStyle={themeMode === "dark" ? "light-content" : "dark-content"}
       />
-    </View>
-  );
+      <SafeAreaView style={styles.statusBarAndSafeAreaView}>
+        <CustomText>App</CustomText>
+      </SafeAreaView>
+    </>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
-
-export default App;
+export default App
