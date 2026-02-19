@@ -1,0 +1,6 @@
+export const NavigationPaths = {
+    DRAWER_NAVIGATION: "DRAWER_NAVIGATION",
+
+    WITH_TIMING_EXAMPLE: "WITH_TIMING_EXAMPLE",
+    BUTTON_1: "BUTTON_1"
+}

@@ -4,61 +4,56 @@ import { Appearance } from 'react-native';
 export type ThemeModeType = 'light' | 'dark' | 'systemLight' | 'systemDark';
 
 export type ThemeColorsType = {
-    statusBarAndSafeAreaView: string,
+    statusBarAndSafeAreaView: string;
+    drawerColor: string;
     background1: string;
 
-    cardColor: string;
-
-    btnColor: string;
-    btnText: string;
 
     textColor: string;
     textColor2: string;
     placeholderColor: string;
 
-    inputField: string;
-    inputBorderDefault: string;
-    inputBorderFocused: string;
-    inputBorderError: string
+    primary100: string;
+    primary500: string;
+    primary1000: string;
+
+    secondary100: string;
+    secondary500: string;
+
+
 };
 
 const lightThemeColors: ThemeColorsType = {
     statusBarAndSafeAreaView: "#f8f8fa",
+    drawerColor: "red",
     background1: '#f8f8fa',
 
-    cardColor: "#ffffff",
-
-    btnColor: "#1c84ee",
-    btnText: "white",
-
     textColor: "#5d7186",
-    textColor2: "#313b5e",
-    placeholderColor: "#9caab7",
+    textColor2: "#d25d8a",
+    placeholderColor: "#bbbbc1",
 
+    primary100: "#df97ac",
+    primary500: "#d25d8a",
+    primary1000: "#cc1e4a",
 
-    inputField: "#f8f8fa",
-    inputBorderDefault: "#d8dfe7",
-    inputBorderFocused: "#b0b0bb",
-    inputBorderError: "#ef5f5f"
+    secondary100: "#aacc6c",
+    secondary500: "#3b9953"
 };
 
 const darkThemeColors: ThemeColorsType = {
-    statusBarAndSafeAreaView: "#22282e",
-    background1: '#22282e',
+    statusBarAndSafeAreaView: "#14142B",
+    drawerColor: "#262338",
+    background1: '#14142B',
 
-    cardColor: "#282f36",
+    textColor: "#ffffff",
+    textColor2: "#d25d8a",
+    placeholderColor: "#bbbbc1",
 
-    btnColor: "#1c84ee",
-    btnText: "black",
-
-    textColor: "#aab8c5",
-    textColor2: "#313b5e",
-    placeholderColor: "#7b8896",
-
-    inputField: "#22282e",
-    inputBorderDefault: "#3a4551",
-    inputBorderFocused: "#4a5663",
-    inputBorderError: "rgb(245.4, 159, 159)"
+    primary100: "#df97ac",
+    primary500: "#d25d8a",
+    primary1000: "#cc1e4a",
+    secondary100: "#aacc6c",
+    secondary500: "#3b9953"
 };
 
 const systemModeFromDevice = () =>
@@ -138,34 +133,3 @@ export const ThemeSlice = createSlice({
 
 export const { setThemeMode, setCustomColors, resetCustomColors } = ThemeSlice.actions;
 export default ThemeSlice.reducer;
-
-
-
-
-
-
-// // Read colors anywhere:
-// const colors = useSelector((s: RootState) => s.theme.colors);
-
-// // Switch modes (system-aware):
-// dispatch(setThemeMode('systemDark'));   // or 'systemLight'
-// dispatch(setThemeMode('dark'));
-// dispatch(setThemeMode('light'));
-
-// // Override just primary (both modes or specific mode):
-// dispatch(setCustomColors({ overrides: { primary100: '#ED8936' } }));             // both
-// dispatch(setCustomColors({ overrides: { primary100: '#F6AD55' }, target: 'dark' })); // dark only
-
-// // Reset overrides:
-// dispatch(resetCustomColors()); // both
-// dispatch(resetCustomColors({ target: 'dark' }));
-
-
-
-//   useEffect(() => {
-//     const sub = Appearance.addChangeListener(({ colorScheme }) => {
-//       if (!isSystemModeEnabled) return;
-//       dispatch(setThemeMode(colorScheme === 'dark' ? 'systemDark' : 'systemLight'));
-//     });
-//     return () => sub.remove();
-//   }, [dispatch, isSystemModeEnabled]);
