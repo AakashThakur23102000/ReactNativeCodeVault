@@ -5,6 +5,7 @@ export type ThemeModeType = 'light' | 'dark' | 'systemLight' | 'systemDark';
 
 export type ThemeColorsType = {
     statusBarAndSafeAreaView: string;
+    headerColor: string;
     drawerColor: string;
     background1: string;
 
@@ -26,6 +27,7 @@ export type ThemeColorsType = {
 const lightThemeColors: ThemeColorsType = {
     statusBarAndSafeAreaView: "#f8f8fa",
     drawerColor: "red",
+    headerColor: "red",
     background1: '#f8f8fa',
 
     textColor: "#5d7186",
@@ -42,6 +44,7 @@ const lightThemeColors: ThemeColorsType = {
 
 const darkThemeColors: ThemeColorsType = {
     statusBarAndSafeAreaView: "#14142B",
+    headerColor: "#14142B",
     drawerColor: "#262338",
     background1: '#14142B',
 
